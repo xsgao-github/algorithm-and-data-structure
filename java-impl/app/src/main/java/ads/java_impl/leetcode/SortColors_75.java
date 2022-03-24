@@ -2,7 +2,7 @@ package ads.java_impl.leetcode;
 
 import java.util.Arrays;
 
-public class SortColors_75 extends ACommand<Integer> {
+public class SortColors_75 {
     public void sortColors(int[] nums) {
         // left/right bounds of value 1
         int l = 0, r = nums.length - 1;
@@ -37,25 +37,20 @@ public class SortColors_75 extends ACommand<Integer> {
         nums[j] = tmp;
     }
 
-    @Override
-    public int[] arrayToArray(int[] input) {
-        sortColors(input);
-        return input;
-    }
-
-    public static void test(ICommand<Integer> command, int[] input, int[] expect) {
-        int[] output = command.arrayToArray(input);
-        if (Arrays.equals(output, expect)) {
-            System.out.println("pass");
-        } else {
-            System.err.println(String.format("error, incorrect output: %s, expect: %s", Arrays.toString(output),
-                    Arrays.toString(expect)));
-        }
-    }
-
     public static void main(String... args) {
         SortColors_75 sc = new SortColors_75();
-        test(sc, new int[] { 2, 0, 2, 1, 1, 0 }, new int[] { 0, 0, 1, 1, 2, 2 });
-        test(sc, new int[] { 2, 0, 1 }, new int[] { 0, 1, 2 });
+        int[] output = null;
+
+        int[] input = new int[] { 2, 0, 2, 1, 1, 0 };
+        int[] expect = new int[] { 0, 0, 1, 1, 2, 2 };
+        sc.sortColors(input);
+        output = input;
+        System.out.println(Arrays.equals(output, expect));
+
+        input = new int[] { 2, 0, 1 };
+        expect = new int[] { 0, 1, 2 };
+        sc.sortColors(input);
+        output = input;
+        System.out.println(Arrays.equals(output, expect));
     }
 }
