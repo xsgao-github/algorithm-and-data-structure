@@ -1,4 +1,4 @@
-package ads.java_impl;
+package ads.java_impl.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
