@@ -6,11 +6,14 @@ public class DuplicateNumber_287 {
         for (int i = 0; i < nums.length; i++) {
             a = nums[i] < 0 ? -1 * nums[i] : nums[i];
             if (nums[a] < 0) {
-                return a;
+                break;
             } else {
                 nums[a] *= -1;
             }
         }
-        return 0;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] < 0 ? -1 * nums[i] : nums[i];
+        }
+        return a;
     }
 }
