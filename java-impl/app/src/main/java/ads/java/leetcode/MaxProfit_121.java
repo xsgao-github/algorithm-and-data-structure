@@ -1,4 +1,4 @@
-package ads.java_impl.leetcode;
+package ads.java.leetcode;
 
 public class MaxProfit_121 {
     public int maxProfit(int[] prices) {

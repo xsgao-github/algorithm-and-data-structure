@@ -1,4 +1,4 @@
-package ads.java_impl.leetcode;
+package ads.java.leetcode;
 
 public class DuplicateNumber_287 {
 	public int findDuplicate(int[] nums) {

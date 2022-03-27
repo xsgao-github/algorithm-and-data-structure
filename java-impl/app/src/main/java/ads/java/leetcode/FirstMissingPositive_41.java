@@ -1,4 +1,4 @@
-package ads.java_impl.leetcode;
+package ads.java.leetcode;
 
 public class FirstMissingPositive_41 {
     /**

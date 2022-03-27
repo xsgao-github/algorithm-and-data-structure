@@ -1,4 +1,4 @@
-package ads.java_impl;
+package ads.java;
 
 public class App {
 

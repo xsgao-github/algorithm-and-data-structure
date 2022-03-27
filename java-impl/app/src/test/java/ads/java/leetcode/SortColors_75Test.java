@@ -1,12 +1,10 @@
-package ads.java_impl.leetcode;
+package ads.java.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import ads.java_impl.leetcode.SortColors_75;
 
 public class SortColors_75Test {
 

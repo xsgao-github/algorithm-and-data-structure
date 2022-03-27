@@ -1,6 +1,6 @@
-package ads.java_impl.leetcode;
+package ads.java.leetcode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
