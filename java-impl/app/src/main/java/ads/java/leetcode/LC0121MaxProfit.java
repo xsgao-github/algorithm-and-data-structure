@@ -18,10 +18,4 @@ public class LC0121MaxProfit {
         }
         return maxProfit;
     }
-
-    public static void main(String... args) {
-        LC0121MaxProfit mp = new LC0121MaxProfit();
-        System.out.println(5 == mp.maxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
-        System.out.println(0 == mp.maxProfit(new int[] { 7, 6, 4, 3, 1 }));
-    }
 }

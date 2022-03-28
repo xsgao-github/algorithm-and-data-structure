@@ -41,14 +41,4 @@ public class LC0041FirstMissingPositive {
         }
         return len + 1;
     }
-
-    public static void main(String... args) {
-        LC0041FirstMissingPositive fmp = new LC0041FirstMissingPositive();
-        System.out.println(2 == fmp.firstMissingPositive(new int[] { 1 }));
-        System.out.println(2 == fmp.firstMissingPositive(new int[] { 1, 1 }));
-        System.out.println(3 == fmp.firstMissingPositive(new int[] { 1, 2, 0 }));
-        System.out.println(3 == fmp.firstMissingPositive(new int[] { 0, 1, 2 }));
-        System.out.println(2 == fmp.firstMissingPositive(new int[] { 3, 4, -1, 1 }));
-        System.out.println(1 == fmp.firstMissingPositive(new int[] { 7, 8, 9, 11, 12 }));
-    }
 }

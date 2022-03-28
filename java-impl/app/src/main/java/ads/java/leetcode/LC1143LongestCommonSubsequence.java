@@ -1,8 +1,5 @@
 package ads.java.leetcode;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class LC1143LongestCommonSubsequence {
 	public int longestCommonSubsequence_recursive(String text1, String text2) {
 		return longestCommonSubsequence_recursive(text1, text2, 0, 0);
@@ -137,9 +134,7 @@ public class LC1143LongestCommonSubsequence {
 					currRow[c] = Math.max(prevRow[c], currRow[c - 1]);
 				}
 			}
-			System.out.println(Arrays.stream(prevRow).boxed().collect(Collectors.toList()));
 		}
-		System.out.println(Arrays.stream(currRow).boxed().collect(Collectors.toList()));
 
 		return currRow[colSize - 1];
 	}
