@@ -11,7 +11,7 @@ import ads.java.leetcode.LC0637AverageOfLevelsInBinaryTree.TreeNode;
 class LC0637AverageOfLevelsInBinaryTreeTest {
 
 	@Test
-	void test() {
+	void testAverageOfLevels() {
 		LC0637AverageOfLevelsInBinaryTree obj = new LC0637AverageOfLevelsInBinaryTree();
 
 		TreeNode root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));

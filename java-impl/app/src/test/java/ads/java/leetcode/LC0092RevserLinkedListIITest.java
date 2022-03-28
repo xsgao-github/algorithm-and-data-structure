@@ -12,7 +12,7 @@ import ads.java.leetcode.LC0092RevserLinkedListII.ListNode;
 class LC0092RevserLinkedListIITest {
 
 	@Test
-	void test() {
+	void testReverseList() {
 		LC0092RevserLinkedListII rll = new LC0092RevserLinkedListII();
 		ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
 		assertIterableEquals(Arrays.asList(new Integer[] { 1, 4, 3, 2, 5 }), rll.reverseList(head, 2, 4).toList());

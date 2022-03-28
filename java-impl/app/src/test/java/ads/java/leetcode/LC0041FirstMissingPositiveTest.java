@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class LC0041FirstMissingPositiveTest {
 
 	@Test
-	void test() {
+	void testFirstMissingPositive() {
         LC0041FirstMissingPositive obj = new LC0041FirstMissingPositive();
         assertEquals(2, obj.firstMissingPositive(new int[] { 1 }));
         assertEquals(2, obj.firstMissingPositive(new int[] { 1, 1 }));

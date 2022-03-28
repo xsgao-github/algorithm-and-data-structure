@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class LC0127WordLadderTest {
 
 	@Test
-	void test() {
+	void testLadderLength() {
 		LC0127WordLadder wl = new LC0127WordLadder();
 		assertEquals(5, wl.ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")));
 		assertEquals(0, wl.ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log")));

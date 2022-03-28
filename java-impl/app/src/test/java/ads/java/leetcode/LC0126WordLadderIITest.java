@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class LC0126WordLadderIITest {
 
 	@Test
-	void test() {
+	void testFindLadders() {
 		LC0126WordLadderII wl = new LC0126WordLadderII();
 		assertEquals("[[hit, hot, lot, log, cog], [hit, hot, dot, dog, cog]]",
 				wl.findLadders("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")).toString());
