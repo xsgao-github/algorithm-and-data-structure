@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SortColors_75Test {
+public class LC0075SortColorsTest {
 
 	@BeforeEach
     public void setUp() throws Exception {
@@ -18,7 +18,7 @@ public class SortColors_75Test {
 
     @Test
     public void testSortColors() {
-        SortColors_75 sc = new SortColors_75();
+        LC0075SortColors sc = new LC0075SortColors();
         int[] output = null;
 
         int[] input = new int[] { 2, 0, 2, 1, 1, 0 };

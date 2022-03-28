@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class WordLadder_127 {
+public class LC0127WordLadder {
     /**
      * get number of length of ladder
      * 
@@ -72,7 +72,7 @@ public class WordLadder_127 {
     }
 
     public static void main(String... arg) {
-        WordLadder_127 wl = new WordLadder_127();
+        LC0127WordLadder wl = new LC0127WordLadder();
         System.out.println(
                 wl.ladderLength("hit", "cog",
                         Arrays.asList("hot", "dot", "dog", "lot", "log",

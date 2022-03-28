@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class WordLadderII_126 {
+public class LC0126WordLadderII {
     /**
      * Represents a node whtih a pointer to parent node.
      */
@@ -113,7 +113,7 @@ public class WordLadderII_126 {
     }
 
     public static void main(String... arg) {
-        WordLadderII_126 wl = new WordLadderII_126();
+        LC0126WordLadderII wl = new LC0126WordLadderII();
         // System.out.println(
         // wl.findLadders("hit", "cog",
         // Arrays.asList("hot", "dot", "dog", "lot", "log",

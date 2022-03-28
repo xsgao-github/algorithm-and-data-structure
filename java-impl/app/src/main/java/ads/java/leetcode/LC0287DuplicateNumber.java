@@ -1,6 +1,6 @@
 package ads.java.leetcode;
 
-public class DuplicateNumber_287 {
+public class LC0287DuplicateNumber {
 	public int findDuplicate(int[] nums) {
 		int a = 0;
 		int i = 0;

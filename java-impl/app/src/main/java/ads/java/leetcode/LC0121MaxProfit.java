@@ -1,6 +1,6 @@
 package ads.java.leetcode;
 
-public class MaxProfit_121 {
+public class LC0121MaxProfit {
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;
@@ -20,7 +20,7 @@ public class MaxProfit_121 {
     }
 
     public static void main(String... args) {
-        MaxProfit_121 mp = new MaxProfit_121();
+        LC0121MaxProfit mp = new LC0121MaxProfit();
         System.out.println(5 == mp.maxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
         System.out.println(0 == mp.maxProfit(new int[] { 7, 6, 4, 3, 1 }));
     }

@@ -2,7 +2,7 @@ package ads.java.leetcode;
 
 import java.util.Arrays;
 
-public class SortColors_75 {
+public class LC0075SortColors {
     public void sortColors(int[] nums) {
         // left/right bounds of value 1
         int l = 0, r = nums.length - 1;
@@ -38,7 +38,7 @@ public class SortColors_75 {
     }
 
     public static void main(String... args) {
-        SortColors_75 sc = new SortColors_75();
+        LC0075SortColors sc = new LC0075SortColors();
         int[] output = null;
 
         int[] input = new int[] { 2, 0, 2, 1, 1, 0 };

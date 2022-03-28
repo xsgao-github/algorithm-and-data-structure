@@ -7,13 +7,13 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import ads.java.leetcode.RevserLinkedListTwo_92.ListNode;
+import ads.java.leetcode.LC0092RevserLinkedListII.ListNode;
 
-class RevserLinkedListTwo_92Test {
+class LC0092RevserLinkedListIITest {
 
 	@Test
 	void test() {
-		RevserLinkedListTwo_92 rll = new RevserLinkedListTwo_92();
+		LC0092RevserLinkedListII rll = new LC0092RevserLinkedListII();
 		ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
 		assertIterableEquals(Arrays.asList(new Integer[] { 1, 4, 3, 2, 5 }), rll.reverseList(head, 2, 4).toList());
 

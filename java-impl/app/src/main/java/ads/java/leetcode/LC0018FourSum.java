@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FourSum_18 {
+public class LC0018FourSum {
 
     static private class Duoplet {
         // indices
@@ -152,7 +152,7 @@ public class FourSum_18 {
     }
 
     public static void main(String... args) {
-        FourSum_18 sum = new FourSum_18();
+        LC0018FourSum sum = new LC0018FourSum();
         System.out.println(sum.fourSum(new int[] { -3, -2, -1, 0, 0, 1, 2, 3 }, 0));
         // System.out.println(sum.fourSum(new int[] { 0, 0, 0, 0 }, 0));
         // System.out.println(sum.fourSum(new int[] { -3, -1, 0, 2, 4, 5 }, 0));

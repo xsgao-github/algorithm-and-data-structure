@@ -4,18 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class DuplicateNumber_287Test {
+class LC0287DuplicateNumberTest {
 
 	@Test
 	void testFindDuplicate() {
-		DuplicateNumber_287 df = new DuplicateNumber_287();
+		LC0287DuplicateNumber df = new LC0287DuplicateNumber();
 		assertEquals(2, df.findDuplicate(new int[] { 1, 3, 4, 2, 2 }));
 		assertEquals(3, df.findDuplicate(new int[] { 3, 1, 3, 4, 2 }));
 	}
 
 	@Test
 	void testFindDuplicateGauss() {
-		DuplicateNumber_287 df = new DuplicateNumber_287();
+		LC0287DuplicateNumber df = new LC0287DuplicateNumber();
 		assertEquals(2, df.findDuplicateGauss(new int[] { 1, 3, 4, 2, 2 }));
 		assertEquals(3, df.findDuplicateGauss(new int[] { 3, 1, 3, 4, 2 }));
 	}

@@ -3,7 +3,7 @@ package ads.java.leetcode;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class LongestCommonSubsequence_1143 {
+public class LC1143LongestCommonSubsequence {
 	public int longestCommonSubsequence_recursive(String text1, String text2) {
 		return longestCommonSubsequence_recursive(text1, text2, 0, 0);
 	}

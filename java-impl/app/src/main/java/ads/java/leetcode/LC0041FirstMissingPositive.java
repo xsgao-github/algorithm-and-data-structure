@@ -1,6 +1,6 @@
 package ads.java.leetcode;
 
-public class FirstMissingPositive_41 {
+public class LC0041FirstMissingPositive {
     /**
      * 
      * @param nums
@@ -43,7 +43,7 @@ public class FirstMissingPositive_41 {
     }
 
     public static void main(String... args) {
-        FirstMissingPositive_41 fmp = new FirstMissingPositive_41();
+        LC0041FirstMissingPositive fmp = new LC0041FirstMissingPositive();
         System.out.println(2 == fmp.firstMissingPositive(new int[] { 1 }));
         System.out.println(2 == fmp.firstMissingPositive(new int[] { 1, 1 }));
         System.out.println(3 == fmp.firstMissingPositive(new int[] { 1, 2, 0 }));

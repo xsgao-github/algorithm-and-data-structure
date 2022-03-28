@@ -3,7 +3,7 @@ package ads.java.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TwoSum_1 {
+public class LC0001_TwoSum {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>(nums.length);
         for (int i = 0; i < nums.length; i++) {
@@ -19,7 +19,7 @@ public class TwoSum_1 {
     }
 
     public static void main(String... args) {
-        TwoSum_1 sum = new TwoSum_1();
+        LC0001_TwoSum sum = new LC0001_TwoSum();
         int[] ret = sum.twoSum(new int[] { 2, 7, 11, 15 }, 9);
         System.out.println(String.format("%d, %d", ret[0], ret[1]));
         ret = sum.twoSum(new int[] { 3, 2, 4 }, 6);

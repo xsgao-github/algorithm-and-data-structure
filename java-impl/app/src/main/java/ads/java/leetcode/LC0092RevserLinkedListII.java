@@ -3,7 +3,7 @@ package ads.java.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RevserLinkedListTwo_92 {
+public class LC0092RevserLinkedListII {
 	public static class ListNode {
 		int val;
 		ListNode next;

@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class LongestCommonSubsequence_1143Test {
+class LC1143LongestCommonSubsequenceTest {
 
 	@Test
 	void testLongestCommonSubsequence_recursive() {
-		LongestCommonSubsequence_1143 lcs = new LongestCommonSubsequence_1143();
+		LC1143LongestCommonSubsequence lcs = new LC1143LongestCommonSubsequence();
 		assertEquals(3, lcs.longestCommonSubsequence_recursive("abc", "bcxabc"));
 		assertEquals(3, lcs.longestCommonSubsequence_recursive("abcde", "ace"));
 		assertEquals(3, lcs.longestCommonSubsequence_recursive("ace", "abcde"));
@@ -19,7 +19,7 @@ class LongestCommonSubsequence_1143Test {
 
 	@Test
 	void testLongestCommonSubsequence_R2L() {
-		LongestCommonSubsequence_1143 lcs = new LongestCommonSubsequence_1143();
+		LC1143LongestCommonSubsequence lcs = new LC1143LongestCommonSubsequence();
 		assertEquals(2, lcs.longestCommonSubsequence_R2L("oxcpqrsvwf", "shmtulqrypy"));
 		assertEquals(5, lcs.longestCommonSubsequence_R2L("abcba", "abcbcba"));
 		assertEquals(1, lcs.longestCommonSubsequence_R2L("bc", "ac"));
@@ -34,7 +34,7 @@ class LongestCommonSubsequence_1143Test {
 
 	@Test
 	void testLongestCommonSubsequence_L2R() {
-		LongestCommonSubsequence_1143 lcs = new LongestCommonSubsequence_1143();
+		LC1143LongestCommonSubsequence lcs = new LC1143LongestCommonSubsequence();
 		assertEquals(2, lcs.longestCommonSubsequence_L2R("oxcpqrsvwf", "shmtulqrypy"));
 		assertEquals(5, lcs.longestCommonSubsequence_L2R("abcba", "abcbcba"));
 		assertEquals(1, lcs.longestCommonSubsequence_L2R("bc", "ac"));
