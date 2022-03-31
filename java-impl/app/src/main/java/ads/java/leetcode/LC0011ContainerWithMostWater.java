@@ -31,6 +31,11 @@ public class LC0011ContainerWithMostWater {
 					r--;
 				}
 			}
+			// l & j meet
+			if (l == r) {
+				break;
+			}
+
 			tmp = Math.min(height[l], height[r]) * (r - l);
 			if (tmp > max) {
 				max = tmp;
