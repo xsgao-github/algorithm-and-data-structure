@@ -11,6 +11,9 @@ class LC0198HouseRobberTest {
 		LC0198HouseRobber obj = new LC0198HouseRobber();
 		assertEquals(4, obj.rob(new int[] { 1, 2, 3, 1 }));
 		assertEquals(12, obj.rob(new int[] { 2, 7, 9, 3, 1 }));
+
+		assertEquals(4, obj.robRecursive(new int[] { 1, 2, 3, 1 }));
+		assertEquals(12, obj.robRecursive(new int[] { 2, 7, 9, 3, 1 }));
 	}
 
 }

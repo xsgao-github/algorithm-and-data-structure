@@ -21,7 +21,11 @@ public final class LC0198HouseRobber {
     	return r0;
     }
 
-	private int recursive(int[] nums, int r) {
+    public int robRecursive(int[] nums) {
+    	return Math.max(recursive(nums, nums.length - 3) + nums[nums.length - 1], recursive(nums, nums.length - 2)); 
+    }
+
+    private int recursive(int[] nums, int r) {
 		if (r == 0) {
 			return nums[0];
 		} if (r == 1) {
