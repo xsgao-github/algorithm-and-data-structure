@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class LC0217ContainsSuplicateTest {
+class LC0217ContainsDuplicateTest {
 
 	@Test
 	void testContainsDuplicate() {
-		LC0217ContainsSuplicate obj = new LC0217ContainsSuplicate();
+		LC0217ContainsDuplicate obj = new LC0217ContainsDuplicate();
 		assertTrue(obj.containsDuplicate(new int[] { 1, 2, 3, 1 }));
 	}
 
