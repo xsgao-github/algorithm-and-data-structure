@@ -1,6 +1,6 @@
 package ads.java.leetcode;
 
-public class LC0121MaxProfit {
+public class LC0121BestTimeToBuyAndSellStock {
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) {
             return 0;
