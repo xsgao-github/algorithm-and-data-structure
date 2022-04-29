@@ -4,10 +4,10 @@ public class LC0011ContainerWithMostWater {
 
 	/**
 	 * Let area = min(height[left_0], height(right_0) * (right_0 - left_0). If there
-	 * is another solutionleft_1 and right_1 which contains more water, then because
-	 * (right_1 - left _1) < (right_1 - left_0), we need to find min(height[left_1],
-	 * height(right_1) > min(height[left_0], height(right_0),. This is the logic
-	 * behind 2 pointers algorithm.
+	 * is another solution, left_1 and right_1 inside left_0 and right_0, which
+	 * contains more water, then because (right_1 - left _1) < (right_1 - left_0),
+	 * we need to find min(height[left_1], height(right_1) > min(height[left_0],
+	 * height(right_0). This is the logic behind 2 pointers algorithm.
 	 * 
 	 * @param height
 	 * @return
