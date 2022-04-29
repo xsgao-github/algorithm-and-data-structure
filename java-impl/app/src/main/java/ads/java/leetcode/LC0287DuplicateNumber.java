@@ -20,35 +20,4 @@ public class LC0287DuplicateNumber {
 		}
 		return a;
 	}
-
-	public int findDuplicateGauss(int[] nums) {
-		if (nums.length < 256 * 128) {
-			int s = 0;
-			for (int i : nums) {
-				s += i;
-			}
-			// if there is no duplicate
-			int g = 0;
-			if (nums.length % 2 == 0) {
-				g = ((nums.length / 2) * (nums.length - 1));
-			} else {
-				g = (((nums.length - 1) / 2) * nums.length);
-			}
-			return s - g;
-		} else {
-			long s = 0;
-			for (int i : nums) {
-				s += i;
-			}
-			// if there is no duplicate
-			long g = 0;
-			if (nums.length % 2 == 0) {
-				g = (((long) nums.length) / 2) * (((long) nums.length) - 1);
-			} else {
-				g = ((((long) nums.length) - 1) / 2) * ((long) nums.length);
-			}
-			// TODO if s overflow but g not
-			return (int) (s - g);
-		}
-	}
 }

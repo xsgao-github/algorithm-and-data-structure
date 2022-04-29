@@ -11,12 +11,6 @@ class LC0287DuplicateNumberTest {
 		LC0287DuplicateNumber df = new LC0287DuplicateNumber();
 		assertEquals(2, df.findDuplicate(new int[] { 1, 3, 4, 2, 2 }));
 		assertEquals(3, df.findDuplicate(new int[] { 3, 1, 3, 4, 2 }));
-	}
-
-	@Test
-	void testFindDuplicateGauss() {
-		LC0287DuplicateNumber df = new LC0287DuplicateNumber();
-		assertEquals(2, df.findDuplicateGauss(new int[] { 1, 3, 4, 2, 2 }));
-		assertEquals(3, df.findDuplicateGauss(new int[] { 3, 1, 3, 4, 2 }));
+		assertEquals(2, df.findDuplicate(new int[] { 2, 2, 2, 2, 2 }));
 	}
 }
