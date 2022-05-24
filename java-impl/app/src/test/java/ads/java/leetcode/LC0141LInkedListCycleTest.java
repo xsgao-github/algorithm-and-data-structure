@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import ads.java.leetcode.LC0141LInkedListCycle.ListNode;
-
 class LC0141LInkedListCycleTest {
 
 	@Test
@@ -31,12 +29,10 @@ class LC0141LInkedListCycleTest {
 			return null;
 		}
 
-		ListNode head = new ListNode(vals[0]);
+		ListNode head = ListNode.createListNode(vals);
 		ListNode tail = head;
-		if (vals.length > 1) {
-			int[] sub = new int[vals.length - 1];
-			System.arraycopy(vals, 1, sub, 0, sub.length);
-			tail = addNodes(head, sub);
+		while (tail.next != null) {
+			tail = tail.next;
 		}
 		if (pos >= 0) {
 			ListNode n = head;
@@ -47,19 +43,4 @@ class LC0141LInkedListCycleTest {
 		}
 		return head;
 	}
-
-	private ListNode addNodes(ListNode head, int[] vals) {
-		ListNode n = head;
-		for (int val : vals) {
-			n = addNode(n, val);
-		}
-		return n;
-	}
-
-	private ListNode addNode(ListNode p, int val) {
-		ListNode n = new ListNode(val);
-		p.next = n;
-		return n;
-	}
-
 }

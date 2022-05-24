@@ -5,26 +5,6 @@ import java.util.Map;
 
 public class LC0138CopyListWithRandomPointer {
 
-	public static class Node {
-		int val;
-		Node next;
-		Node random;
-
-		public Node(int val) {
-			this.val = val;
-			this.next = null;
-			this.random = null;
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(String.format("[%d, %s] > ", val, random == null ? "" : random.val + ""));
-			sb.append(next == null ? "null" : next.toString());
-			return sb.toString();
-		}
-	}
-
 	public Node copyRandomList(Node head) {
 		if (head == null) {
 			return null;

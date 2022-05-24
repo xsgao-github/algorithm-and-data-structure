@@ -1,41 +1,6 @@
 package ads.java.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LC0092RevserLinkedListII {
-	public static class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode() {
-		}
-
-		ListNode(int val) {
-			this.val = val;
-		}
-
-		ListNode(int val, ListNode next) {
-			this.val = val;
-			this.next = next;
-		}
-
-		public List<Integer> toList() {
-			List<Integer> l = new ArrayList<>();
-			l.add(val);
-			ListNode n = this;
-			while ((n = n.next) != null) {
-				l.add(n.val);
-			}
-			return l;
-		}
-
-		@Override
-		public String toString() {
-			return String.valueOf(this.val);
-		}
-	}
-
 	/**
 	 * <pre>
 	 *  
@@ -53,7 +18,7 @@ public class LC0092RevserLinkedListII {
 		if (left == right) {
 			return head;
 		}
-		
+
 		// add dummy head
 		ListNode dummy = new ListNode(0, head);
 

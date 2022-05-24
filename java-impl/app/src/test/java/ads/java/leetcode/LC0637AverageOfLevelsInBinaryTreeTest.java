@@ -6,8 +6,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import ads.java.leetcode.LC0637AverageOfLevelsInBinaryTree.TreeNode;
-
 class LC0637AverageOfLevelsInBinaryTreeTest {
 
 	@Test

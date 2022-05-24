@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import ads.java.leetcode.LC0206RevserLinkedList.ListNode;
-
 class LC0206RevserLinkedListTest {
 
 	@Test

@@ -8,8 +8,6 @@ import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
-import ads.java.leetcode.LC0098ValidateBinarySearchTree.TreeNode;
-
 class LC0098ValidateBinarySearchTreeTest {
 
 	@Test

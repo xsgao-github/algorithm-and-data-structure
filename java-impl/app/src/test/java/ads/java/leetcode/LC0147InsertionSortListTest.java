@@ -1,12 +1,11 @@
 package ads.java.leetcode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-import ads.java.leetcode.LC0147InsertionSortList.ListNode;
 
 class LC0147InsertionSortListTest {
 
