@@ -29,6 +29,15 @@ public class ListNode {
 		return l;
 	}
 
+	public int[] toArray() {
+		List<Integer> l = toList();
+		int[] a = new int[l.size()];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = l.get(i);
+		}
+		return a;
+	}
+
 	@Override
 	public String toString() {
 		return String.valueOf(this.val);
