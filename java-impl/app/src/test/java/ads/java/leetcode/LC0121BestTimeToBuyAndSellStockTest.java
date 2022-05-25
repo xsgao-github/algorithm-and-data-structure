@@ -11,6 +11,7 @@ class LC0121BestTimeToBuyAndSellStockTest {
 		LC0121BestTimeToBuyAndSellStock obj = new LC0121BestTimeToBuyAndSellStock();
 		assertEquals(5, obj.maxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
 		assertEquals(0, obj.maxProfit(new int[] { 7, 6, 4, 3, 1 }));
+		assertEquals(3, obj.maxProfit(new int[] { 2, 1, 4 }));
 	}
 
 }
