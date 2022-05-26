@@ -29,7 +29,7 @@ class LC0141LInkedListCycleTest {
 			return null;
 		}
 
-		ListNode head = ListNode.createListNode(vals);
+		ListNode head = ListNode.createList(vals);
 		ListNode tail = head;
 		while (tail.next != null) {
 			tail = tail.next;

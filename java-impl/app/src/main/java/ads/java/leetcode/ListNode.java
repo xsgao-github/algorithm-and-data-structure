@@ -43,7 +43,7 @@ public class ListNode {
 		return String.valueOf(this.val);
 	}
 
-	public static ListNode createListNode(int[] vals) {
+	public static ListNode createList(int[] vals) {
 		if (vals.length == 0) {
 			return null;
 		}
