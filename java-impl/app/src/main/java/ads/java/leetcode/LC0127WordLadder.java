@@ -19,9 +19,9 @@ public class LC0127WordLadder {
      * @return
      */
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> wordSet = new HashSet<>(wordList);
+		Set<String> wordSet = new HashSet<>(wordList);
 
-        // prepopulate map
+        // populate map - all word that differ to each other by only one letter is grouped together
         Map<String, List<String>> adj = new HashMap<>();
         wordSet.add(beginWord);
         for (String str : wordSet) {
