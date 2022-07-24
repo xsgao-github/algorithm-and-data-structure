@@ -10,10 +10,15 @@ public class LC0371SumOfTwoIntegers {
 	 */
 	public int getSum(int a, int b) {
 		int sum = 0;
+		// significant 
 		int s = 1;
+		// value of a in current bit position
 		int va = 0;
+		// value of b in current bit position
 		int vb = 0;
+		// carry over
 		int carry = 0;
+
 		for (int i = 0; i < 32; i++) {
 			// current position
 			va = a & s;

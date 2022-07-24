@@ -8,18 +8,22 @@ public class LC0338CountingBits {
 			return new int[] {0, 1};
 		}
 
+		// return array
 		int[] ret = new int[n + 1];
+
+		// when this only one bit
 		ret[0] = 0;
 		ret[1] = 1;
 
-		int step = 2;
+		// shift position left, now the left most bit is 1, so the count of 1's can be 
+		// derived from the right bits' + 1  
+		int step = 1 << 1;
     	int i = 2;
-    	int j = 2;
     	while (i <= n) {
-    		for (j = i; j < step + i && j <= n; j++) {
-    			ret[j] = ret[j - step] + 1;
+    		for (i = step; i < step + step && i <= n; i++) {
+    			ret[i] = ret[i - step] + 1;
     		}
-    		i = j;
+    		// shift to left
     		step <<= 1;
     	}
     	return ret;
