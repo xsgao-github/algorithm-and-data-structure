@@ -1,6 +1,6 @@
 package ads.java.leetcode;
 
-public class LC0206RevserLinkedList {
+public class LC0206ReverseLinkedList {
 	/**
 	 * <pre>
 	 *  
