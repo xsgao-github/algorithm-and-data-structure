@@ -1,6 +1,4 @@
-package ads.java.blind75;
-
-import ads.java.leetcode.ListNode;
+package ads.java.leetcode;
 
 public class LC0147InsertionSortList {
 

@@ -1,4 +1,4 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 

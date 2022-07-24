@@ -1,9 +1,7 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import ads.java.leetcode.Node;
 
 public class LC0138CopyListWithRandomPointer {
 

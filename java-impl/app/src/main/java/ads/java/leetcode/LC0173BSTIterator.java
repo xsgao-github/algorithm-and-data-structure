@@ -1,9 +1,7 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import java.util.Deque;
 import java.util.LinkedList;
-
-import ads.java.leetcode.TreeNode;
 
 public class LC0173BSTIterator {
 	/**

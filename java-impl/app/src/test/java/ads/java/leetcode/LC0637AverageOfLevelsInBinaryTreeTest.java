@@ -1,12 +1,10 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-import ads.java.leetcode.TreeNode;
 
 class LC0637AverageOfLevelsInBinaryTreeTest {
 

@@ -1,4 +1,4 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;

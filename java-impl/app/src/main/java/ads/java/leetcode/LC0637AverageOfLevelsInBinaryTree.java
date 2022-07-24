@@ -1,11 +1,9 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-
-import ads.java.leetcode.TreeNode;
 
 public class LC0637AverageOfLevelsInBinaryTree {
 	public List<Double> averageOfLevels(TreeNode root) {

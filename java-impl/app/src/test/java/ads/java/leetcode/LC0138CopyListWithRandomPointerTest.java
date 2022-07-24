@@ -1,11 +1,9 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
-
-import ads.java.leetcode.Node;
 
 class LC0138CopyListWithRandomPointerTest {
 

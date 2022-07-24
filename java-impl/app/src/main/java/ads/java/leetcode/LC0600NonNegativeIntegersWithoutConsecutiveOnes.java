@@ -1,4 +1,4 @@
-package ads.java.blind75;
+package ads.java.leetcode;
 
 public class LC0600NonNegativeIntegersWithoutConsecutiveOnes {
 	/**
