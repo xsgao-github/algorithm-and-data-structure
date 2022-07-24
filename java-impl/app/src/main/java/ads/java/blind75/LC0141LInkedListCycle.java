@@ -1,0 +1,23 @@
+package ads.java.blind75;
+
+import ads.java.leetcode.ListNode;
+
+public class LC0141LInkedListCycle {
+	public boolean hasCycle(ListNode head) {
+		if (head == null) {
+			return false;
+		}
+
+		ListNode slow = head;
+		ListNode fast = head;
+		while (fast.next != null && fast.next.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
