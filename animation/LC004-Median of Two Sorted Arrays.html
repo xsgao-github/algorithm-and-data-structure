@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Median of Two Sorted Arrays - Strict Binary Search Partition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #89b4fa;
+        }
+
+        canvas {
+            background-color: #181825;
+            border: 2px solid #45475a;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .alert-container {
+            margin-top: 12px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alertBox {
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .alertBox.placeholder {
+            display: flex;
+            visibility: hidden;
+        }
+
+        .alertBox.red {
+            background-color: rgba(243, 139, 168, 0.15);
+            border: 2px solid #f38ba8;
+            color: #f38ba8;
+            box-shadow: 0 0 10px rgba(243, 139, 168, 0.2);
+        }
+
+        .alertBox.green {
+            background-color: rgba(166, 227, 161, 0.15);
+            border: 2px solid #a6e3a1;
+            color: #a6e3a1;
+            box-shadow: 0 0 10px rgba(166, 227, 161, 0.2);
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background-color: #89b4fa;
+            color: #11111b;
+            border: none;
+            padding: 10px 18px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #b4befe;
+        }
+
+        button:disabled {
+            background-color: #585b70;
+            color: #7f849c;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        button svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #f9e2af;
+            height: 24px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Median of Two Sorted Arrays - Strict Binary Search Partition</h2>
+
+    <canvas id="animCanvas" width="860" height="400"></canvas>
+
+    <div id="status">Slide 0: Balls are sorted.</div>
+
+    <div class="alert-container">
+        <div id="placeholderAlert" class="alertBox placeholder">&nbsp;</div>
+
+        <div id="step1Alert" class="alertBox green">
+            💡 <span>Naive Solution: Blend arrays together, merge &amp; sort completely, find the middle divider, and calculate the median!</span>
+        </div>
+
+        <div id="step1_5Alert" class="alertBox green">
+            🔍 <span>Partition arrays into left/right halves such that balls are balanced and balls on the left ≤ balls on the right! Compare only the 4 boundary balls (5, 6, 7, 8), and use them for calculation.</span>
+        </div>
+
+        <div id="step2_5Alert" class="alertBox green">
+            ⚙️ <span>Find the correct partition in red balls. The green partition updates automatically to balance left/right halves!</span>
+        </div>
+
+        <div id="infoBoxGreenR1" class="alertBox green">
+            ✅ <span>Boundary Check Passed (Pair 1): <strong>4 ≤ 9</strong> (maxLeftY ≤ minRightX)</span>
+        </div>
+
+        <div id="infoBoxRedR1" class="alertBox red">
+            ❌ <span>Boundary Check Failed (Pair 2): Ball <strong>7 ≤ 6</strong> is FALSE (maxLeftX &gt; minRightY)</span>
+        </div>
+
+        <div id="infoBoxGreenR2" class="alertBox green">
+            ✅ <span>Boundary Check Passed (Pair 1): <strong>3 ≤ 10</strong> (maxLeftX ≤ minRightY)</span>
+        </div>
+
+        <div id="infoBoxRedR2" class="alertBox red">
+            ❌ <span>Boundary Check Failed (Pair 2): Ball <strong>8 ≤ 5</strong> is FALSE (maxLeftY &gt; minRightX)</span>
+        </div>
+
+        <div id="infoBoxGreenR3_1" class="alertBox green">
+            ✅ <span>Boundary Check Passed (Pair 1): <strong>5 ≤ 8</strong> (maxLeftX ≤ minRightY)</span>
+        </div>
+
+        <div id="infoBoxGreenR3_2" class="alertBox green">
+            ✅ <span>Boundary Check Passed (Pair 2): <strong>6 ≤ 7</strong> (maxLeftY ≤ minRightX)</span>
+        </div>
+
+        <div id="alertR1Sort" class="alertBox red">
+            ⚠️ <span>Merged Order Verification (Round 1): Left half contains <strong>7</strong>, which is larger than right half <strong>6</strong>!</span>
+        </div>
+
+        <div id="alertR2Sort" class="alertBox red">
+            ⚠️ <span>Merged Order Verification (Round 2): Left half contains <strong>8</strong>, which is larger than right half <strong>5</strong>!</span>
+        </div>
+
+        <div id="alertR3Sort" class="alertBox green">
+            ✅ <span>Merged Order Verification (Round 3): Perfect sorted sequence! Left partition elements are all ≤ right partition.</span>
+        </div>
+
+        <div id="step13Alert" class="alertBox green">
+            🎯 <span>Median = <strong>(max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2</strong> = (max(5, 6) + min(7, 8)) / 2 = (6 + 7) / 2 = <strong>6.5</strong></span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()" title="Previous" disabled>
+            <svg viewBox="0 0 24 24"><path d="M16 5l-11 7 11 7V5z"/></svg>
+        </button>
+        <button id="stepBtn" onclick="nextSlide()" title="Next">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="resetBtn" onclick="resetAnimation()" title="Reset">
+            <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('animCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const tray1Values = [3, 5, 7, 9, 11];
+        const tray2Values = [1, 2, 4, 6, 8, 10, 12];
+
+        const ballRadius = 22;
+        const ballSpacing = 55;
+
+        const trayStartX = 125;
+        const trayTotalSlots = 12;
+
+        const t2OriginY = 250;
+        const t1OriginY = t2OriginY - 45;
+
+        let ballsT1 = [];
+        let ballsT2 = [];
+        let currentSlide = 0;
+        let maxSlides = 10;
+        let isAnimating = false;
+        let isBusy = false;
+
+        let blinkAngle = 0;
+        let highlightPair = []; 
+        let highlightColor = '#a6e3a1'; 
+        let timeout1 = null;
+        let timeout2 = null;
+        let timeout3 = null;
+        let loopTimeout = null;
+
+        function initData() {
+            ballsT1 = [];
+            ballsT2 = [];
+            highlightPair = [];
+            clearAllTimeouts();
+
+            const t1StartX = trayStartX + 3.5 * ballSpacing;
+            tray1Values.forEach((val, idx) => {
+                const posX = t1StartX + idx * ballSpacing;
+                ballsT1.push({
+                    val: val,
+                    origX: posX,
+                    x: posX,
+                    y: t1OriginY,
+                    targetX: posX,
+                    targetY: t1OriginY,
+                    color: '#f38ba8'
+                });
+            });
+
+            const t2StartX = trayStartX + 2.5 * ballSpacing;
+            tray2Values.forEach((val, idx) => {
+                const posX = t2StartX + idx * ballSpacing;
+                ballsT2.push({
+                    val: val,
+                    origX: posX,
+                    x: posX,
+                    y: t2OriginY,
+                    targetX: posX,
+                    targetY: t2OriginY,
+                    color: '#a6e3a1'
+                });
+            });
+        }
+
+        function clearAllTimeouts() {
+            if (timeout1) clearTimeout(timeout1);
+            if (timeout2) clearTimeout(timeout2);
+            if (timeout3) clearTimeout(timeout3);
+            if (loopTimeout) clearTimeout(loopTimeout);
+            isBusy = false;
+        }
+
+        function drawBall(ball, isHighlighted = false, strokeColor = '#f9e2af') {
+            ctx.save();
+
+            if (isHighlighted) {
+                const pulseScale = 1 + 0.15 * Math.sin(blinkAngle);
+                const pulseAlpha = 0.5 + 0.4 * Math.sin(blinkAngle);
+
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ballRadius * pulseScale + 5, 0, Math.PI * 2);
+                ctx.strokeStyle = strokeColor;
+                ctx.globalAlpha = pulseAlpha;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ballRadius + 8, 0, Math.PI * 2);
+                ctx.fillStyle = strokeColor;
+                ctx.globalAlpha = 0.25;
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = ball.color;
+            ctx.fill();
+            ctx.lineWidth = isHighlighted ? 4 : 3;
+            ctx.strokeStyle = isHighlighted ? strokeColor : '#1e1e2e';
+            ctx.stroke();
+
+            ctx.fillStyle = '#11111b';
+            ctx.font = 'bold 16px Segoe UI';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(ball.val, ball.x, ball.y);
+
+            ctx.restore();
+        }
+
+        function drawTray(minX, maxX, y, alpha = 1.0) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.strokeStyle = '#cdd6f4';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(minX - 30, y - 28);
+            ctx.lineTo(minX - 30, y + 28);
+            ctx.lineTo(maxX + 30, y + 28);
+            ctx.lineTo(maxX + 30, y - 28);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawDivider() {
+            if (currentSlide === 1 && isBusy) return;
+            if (currentSlide >= 1) {
+                ctx.save();
+                ctx.strokeStyle = '#f9e2af';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([6, 6]);
+                const dividerX = trayStartX + 6 * ballSpacing - ballSpacing / 2;
+                ctx.beginPath();
+                ctx.moveTo(dividerX, 160);
+                ctx.lineTo(dividerX, 310);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const fixedTrayMinX = trayStartX;
+            const fixedTrayMaxX = trayStartX + (trayTotalSlots - 1) * ballSpacing;
+
+            drawTray(fixedTrayMinX, fixedTrayMaxX, t2OriginY, 1.0);
+            drawDivider();
+
+            ballsT2.forEach(b => {
+                const isHL = highlightPair.includes(b.val);
+                drawBall(b, isHL, highlightColor);
+            });
+            ballsT1.forEach(b => {
+                const isHL = highlightPair.includes(b.val);
+                drawBall(b, isHL, highlightColor);
+            });
+        }
+
+        const statusEl = document.getElementById('status');
+        const placeholderAlert = document.getElementById('placeholderAlert');
+        const step1Alert = document.getElementById('step1Alert');
+        const step1_5Alert = document.getElementById('step1_5Alert');
+        const step2_5Alert = document.getElementById('step2_5Alert');
+        const infoBoxGreenR1 = document.getElementById('infoBoxGreenR1');
+        const infoBoxRedR1 = document.getElementById('infoBoxRedR1');
+        const infoBoxGreenR2 = document.getElementById('infoBoxGreenR2');
+        const infoBoxRedR2 = document.getElementById('infoBoxRedR2');
+        const infoBoxGreenR3_1 = document.getElementById('infoBoxGreenR3_1');
+        const infoBoxGreenR3_2 = document.getElementById('infoBoxGreenR3_2');
+        const alertR1Sort = document.getElementById('alertR1Sort');
+        const alertR2Sort = document.getElementById('alertR2Sort');
+        const alertR3Sort = document.getElementById('alertR3Sort');
+        const step13Alert = document.getElementById('step13Alert');
+        const prevBtn = document.getElementById('prevBtn');
+        const stepBtn = document.getElementById('stepBtn');
+
+        function hideAlerts() {
+            step1Alert.style.display = "none";
+            step1_5Alert.style.display = "none";
+            step2_5Alert.style.display = "none";
+            infoBoxGreenR1.style.display = "none";
+            infoBoxRedR1.style.display = "none";
+            infoBoxGreenR2.style.display = "none";
+            infoBoxRedR2.style.display = "none";
+            infoBoxGreenR3_1.style.display = "none";
+            infoBoxGreenR3_2.style.display = "none";
+            alertR1Sort.style.display = "none";
+            alertR2Sort.style.display = "none";
+            alertR3Sort.style.display = "none";
+            step13Alert.style.display = "none";
+            
+            placeholderAlert.style.display = "flex";
+        }
+
+        function showAlert(el) {
+            hideAlerts();
+            placeholderAlert.style.display = "none";
+            el.style.display = "flex";
+        }
+
+        function updateButtonStates() {
+            prevBtn.disabled = (currentSlide === 0);
+            stepBtn.disabled = (currentSlide === maxSlides);
+        }
+
+        function animate(onComplete) {
+            isAnimating = true;
+
+            function frame() {
+                let moving = false;
+                const speed = 0.08;
+
+                ballsT1.forEach(b => {
+                    if (Math.abs(b.x - b.targetX) > 0.5 || Math.abs(b.y - b.targetY) > 0.5) {
+                        b.x += (b.targetX - b.x) * speed;
+                        b.y += (b.targetY - b.y) * speed;
+                        moving = true;
+                    } else {
+                        b.x = b.targetX;
+                        b.y = b.targetY;
+                    }
+                });
+
+                ballsT2.forEach(b => {
+                    if (Math.abs(b.x - b.targetX) > 0.5 || Math.abs(b.y - b.targetY) > 0.5) {
+                        b.x += (b.targetX - b.x) * speed;
+                        b.y += (b.targetY - b.y) * speed;
+                        moving = true;
+                    } else {
+                        b.x = b.targetX;
+                        b.y = b.targetY;
+                    }
+                });
+
+                render();
+
+                if (moving) {
+                    requestAnimationFrame(frame);
+                } else {
+                    isAnimating = false;
+                    if (onComplete) onComplete();
+                }
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        function pulseLoop() {
+            if (highlightPair.length > 0) {
+                blinkAngle += 0.08;
+                render();
+            }
+            requestAnimationFrame(pulseLoop);
+        }
+
+        function runThreeCaseLoop(caseIdx = 0) {
+            if (currentSlide !== 3) return;
+
+            const redOffsets = [3.0, 5.0, 4.0];
+            const greenOffsets = [3.0, 1.0, 2.0];
+
+            ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + redOffsets[caseIdx]) * ballSpacing; b.targetY = t1OriginY; });
+            ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + greenOffsets[caseIdx]) * ballSpacing; b.targetY = t2OriginY; });
+
+            animate(() => {
+                if (currentSlide === 3) {
+                    loopTimeout = setTimeout(() => {
+                        runThreeCaseLoop((caseIdx + 1) % 3);
+                    }, 800);
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (isAnimating && currentSlide !== 3) return;
+            clearAllTimeouts();
+            currentSlide++;
+
+            if (currentSlide === 1) {
+                statusEl.innerText = "Slide 1: Naive Solution - Merge and Calculate the Median";
+                hideAlerts();
+                highlightPair = [];
+                isBusy = true;
+
+                const allValsSorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                allValsSorted.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    timeout1 = setTimeout(() => {
+                        isBusy = false;
+                        render();
+                        showAlert(step1Alert);
+                        highlightPair = [6, 7];
+                        highlightColor = '#a6e3a1';
+                    }, 250);
+                });
+            } else if (currentSlide === 2) {
+                /* UPDATED: Directly highlight all 4 boundary balls together */
+                statusEl.innerText = "Slide 2: Partition Properly, Calculate Median Using Only Boundary Balls.";
+                hideAlerts();
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 4.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    showAlert(step1_5Alert);
+                    highlightPair = [5, 6, 7, 8];
+                    highlightColor = '#f9e2af';
+                });
+            } else if (currentSlide === 3) {
+                statusEl.innerText = "Slide 3: Find the Correct Partition in Red Balls - 💡 Binary Search!";
+                showAlert(step2_5Alert);
+                highlightPair = [];
+
+                runThreeCaseLoop(0);
+            } else if (currentSlide === 4) {
+                statusEl.innerText = "Slide 4: Round 1 Partition (Midpoint i = 2) & Validation";
+                hideAlerts();
+                highlightPair = [];
+                isBusy = true;
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    timeout1 = setTimeout(() => {
+                        if (currentSlide === 4) {
+                            highlightPair = [4, 9];
+                            highlightColor = '#a6e3a1';
+                            showAlert(infoBoxGreenR1);
+
+                            timeout2 = setTimeout(() => {
+                                if (currentSlide === 4) {
+                                    highlightPair = [7, 6];
+                                    highlightColor = '#f38ba8';
+                                    showAlert(infoBoxRedR1);
+
+                                    timeout3 = setTimeout(() => {
+                                        if (currentSlide === 4) {
+                                            isBusy = false;
+                                        }
+                                    }, 1800);
+                                }
+                            }, 1800);
+                        }
+                    }, 1000); 
+                });
+            } else if (currentSlide === 5) {
+                statusEl.innerText = "Slide 5: Single Row View (Round 1)";
+                hideAlerts();
+                highlightPair = [];
+
+                const leftVals = [1, 2, 3, 4, 5, 7];
+                leftVals.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                const rightVals = [6, 8, 9, 10, 11, 12];
+                rightVals.forEach((val, idx) => {
+                    const finalX = trayStartX + (idx + 6) * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    highlightPair = [7, 6];
+                    highlightColor = '#f38ba8';
+                    showAlert(alertR1Sort);
+                });
+            } else if (currentSlide === 6) {
+                statusEl.innerText = "Slide 6: Round 2 Partition (Shift Left i = 0) & Validation";
+                hideAlerts();
+                highlightPair = [];
+                isBusy = true;
+
+                ballsT1.forEach((b, idx) => { b.x = b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.y = b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.x = b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.y = b.targetY = t2OriginY; });
+                render();
+
+                timeout1 = setTimeout(() => {
+                    if (currentSlide === 6) {
+                        ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 5.0) * ballSpacing; b.targetY = t1OriginY; });
+                        ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 1.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                        animate(() => {
+                            timeout2 = setTimeout(() => {
+                                if (currentSlide === 6) {
+                                    highlightPair = [3, 10];
+                                    highlightColor = '#a6e3a1';
+                                    showAlert(infoBoxGreenR2);
+
+                                    timeout3 = setTimeout(() => {
+                                        if (currentSlide === 6) {
+                                            highlightPair = [8, 5];
+                                            highlightColor = '#f38ba8';
+                                            showAlert(infoBoxRedR2);
+                                            isBusy = false;
+                                        }
+                                    }, 1800);
+                                }
+                            }, 1000); 
+                        });
+                    }
+                }, 200);
+            } else if (currentSlide === 7) {
+                statusEl.innerText = "Slide 7: Single Row View (Round 2)";
+                hideAlerts();
+                highlightPair = [];
+
+                const leftVals = [1, 2, 3, 4, 6, 8];
+                leftVals.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                const rightVals = [5, 7, 9, 10, 11, 12];
+                rightVals.forEach((val, idx) => {
+                    const finalX = trayStartX + (idx + 6) * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    highlightPair = [8, 5];
+                    highlightColor = '#f38ba8';
+                    showAlert(alertR2Sort);
+                });
+            } else if (currentSlide === 8) {
+                statusEl.innerText = "Slide 8: Round 3 Partition (Converge Right i = 1) & Validation";
+                hideAlerts();
+                highlightPair = [];
+                isBusy = true;
+
+                ballsT1.forEach((b, idx) => { b.x = b.targetX = trayStartX + (idx + 5.0) * ballSpacing; b.y = b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.x = b.targetX = trayStartX + (idx + 1.0) * ballSpacing; b.y = b.targetY = t2OriginY; });
+                render();
+
+                timeout1 = setTimeout(() => {
+                    if (currentSlide === 8) {
+                        ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 4.0) * ballSpacing; b.targetY = t1OriginY; });
+                        ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                        animate(() => {
+                            timeout2 = setTimeout(() => {
+                                if (currentSlide === 8) {
+                                    highlightPair = [5, 8];
+                                    highlightColor = '#a6e3a1';
+                                    showAlert(infoBoxGreenR3_1);
+
+                                    timeout3 = setTimeout(() => {
+                                        if (currentSlide === 8) {
+                                            highlightPair = [6, 7];
+                                            showAlert(infoBoxGreenR3_2);
+                                            isBusy = false;
+                                        }
+                                    }, 1800);
+                                }
+                            }, 1000); 
+                        });
+                    }
+                }, 200);
+            } else if (currentSlide === 9) {
+                statusEl.innerText = "Slide 9: Single Row View (Round 3)";
+                hideAlerts();
+                highlightPair = [];
+
+                const allValsSorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                allValsSorted.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    showAlert(alertR3Sort);
+                });
+            } else if (currentSlide === 10) {
+                statusEl.innerText = "Slide 10: Calculate Median Using Boundary Balls";
+                hideAlerts();
+                isBusy = true;
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 4.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    highlightPair = [5, 6];
+                    highlightColor = '#a6e3a1';
+
+                    timeout1 = setTimeout(() => {
+                        if (currentSlide === 10) {
+                            highlightPair = [7, 8];
+                            highlightColor = '#a6e3a1';
+
+                            timeout2 = setTimeout(() => {
+                                if (currentSlide === 10) {
+                                    highlightPair = [6, 7];
+                                    highlightColor = '#f9e2af';
+                                    showAlert(step13Alert);
+                                    isBusy = false;
+                                }
+                            }, 1200);
+                        }
+                    }, 1200);
+                });
+            }
+            updateButtonStates();
+        }
+
+        function prevSlide() {
+            if (isAnimating && currentSlide !== 3) return;
+            clearAllTimeouts();
+
+            if (currentSlide === 10) {
+                currentSlide = 9;
+                statusEl.innerText = "Slide 9: Single Row View (Round 3)";
+                hideAlerts();
+                highlightPair = [];
+
+                const allValsSorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                allValsSorted.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    showAlert(alertR3Sort);
+                });
+            } else if (currentSlide === 9) {
+                currentSlide = 8;
+                statusEl.innerText = "Slide 8: Round 3 Partition & Validation";
+                hideAlerts();
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 4.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    highlightPair = [6, 7];
+                    highlightColor = '#a6e3a1';
+                    showAlert(infoBoxGreenR3_2);
+                });
+            } else if (currentSlide === 8) {
+                currentSlide = 7;
+                statusEl.innerText = "Slide 7: Single Row View (Round 2)";
+                hideAlerts();
+
+                const leftVals = [1, 2, 3, 4, 6, 8];
+                leftVals.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                const rightVals = [5, 7, 9, 10, 11, 12];
+                rightVals.forEach((val, idx) => {
+                    const finalX = trayStartX + (idx + 6) * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    highlightPair = [8, 5];
+                    highlightColor = '#f38ba8';
+                    showAlert(alertR2Sort);
+                });
+            } else if (currentSlide === 7) {
+                currentSlide = 6;
+                statusEl.innerText = "Slide 6: Round 2 Partition & Validation";
+                hideAlerts();
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 5.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 1.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    highlightPair = [8, 5];
+                    highlightColor = '#f38ba8';
+                    showAlert(infoBoxRedR2);
+                });
+            } else if (currentSlide === 6) {
+                currentSlide = 5;
+                statusEl.innerText = "Slide 5: Single Row View (Round 1)";
+                hideAlerts();
+
+                const leftVals = [1, 2, 3, 4, 5, 7];
+                leftVals.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                const rightVals = [6, 8, 9, 10, 11, 12];
+                rightVals.forEach((val, idx) => {
+                    const finalX = trayStartX + (idx + 6) * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+
+                animate(() => {
+                    highlightPair = [7, 6];
+                    highlightColor = '#f38ba8';
+                    showAlert(alertR1Sort);
+                });
+            } else if (currentSlide === 5) {
+                currentSlide = 4;
+                statusEl.innerText = "Slide 4: Round 1 Partition & Validation";
+                hideAlerts();
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 3.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    highlightPair = [7, 6];
+                    highlightColor = '#f38ba8';
+                    showAlert(infoBoxRedR1);
+                });
+            } else if (currentSlide === 4) {
+                currentSlide = 3;
+                statusEl.innerText = "Slide 3: Find the Correct Partition in Red Balls - 💡 Binary Search!";
+                showAlert(step2_5Alert);
+                highlightPair = [];
+
+                runThreeCaseLoop(0);
+            } else if (currentSlide === 3) {
+                currentSlide = 2;
+                statusEl.innerText = "Slide 2: Partition Properly, Calculate Median Using Only Boundary Balls.";
+                hideAlerts();
+                highlightPair = [];
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 4.0) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.0) * ballSpacing; b.targetY = t2OriginY; });
+
+                animate(() => {
+                    showAlert(step1_5Alert);
+                    highlightPair = [5, 6, 7, 8];
+                    highlightColor = '#f9e2af';
+                });
+            } else if (currentSlide === 2) {
+                currentSlide = 1;
+                statusEl.innerText = "Slide 1: Naive Solution - Merge and Calculate the Median";
+                hideAlerts();
+                highlightPair = [];
+
+                const allValsSorted = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                allValsSorted.forEach((val, idx) => {
+                    const finalX = trayStartX + idx * ballSpacing;
+                    let b = ballsT1.find(item => item.val === val) || ballsT2.find(item => item.val === val);
+                    if (b) { b.targetX = finalX; b.targetY = t2OriginY; }
+                });
+                animate(() => {
+                    showAlert(step1Alert);
+                    highlightPair = [6, 7];
+                    highlightColor = '#a6e3a1';
+                });
+            } else if (currentSlide === 1) {
+                currentSlide = 0;
+                statusEl.innerText = "Slide 0: Balls are sorted.";
+                hideAlerts();
+                highlightPair = [];
+
+                ballsT1.forEach((b, idx) => { b.targetX = trayStartX + (idx + 3.5) * ballSpacing; b.targetY = t1OriginY; });
+                ballsT2.forEach((b, idx) => { b.targetX = trayStartX + (idx + 2.5) * ballSpacing; b.targetY = t2OriginY; });
+                animate();
+            }
+            updateButtonStates();
+        }
+
+        function resetAnimation() {
+            currentSlide = 0;
+            isAnimating = false;
+            isBusy = false;
+            statusEl.innerText = "Slide 0: Balls are sorted.";
+            hideAlerts();
+            initData();
+            render();
+            updateButtonStates();
+        }
+
+        initData();
+        render();
+        hideAlerts();
+        updateButtonStates();
+        requestAnimationFrame(pulseLoop);
+    </script>
+</body>
+</html>
